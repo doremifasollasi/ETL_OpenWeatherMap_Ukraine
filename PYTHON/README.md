@@ -11,30 +11,14 @@ One popular way to manage configuration files in Python projects is to use the `
 Here's an example of how you can use `python-dotenv` to store database credentials in a `.env` file and load them into your Python script:
 
 1. Create a file `.env` in the root directory of your project 
-2. Add the following contents. But! There are two scenario
+2. Add the following contents to `.env`:
 
-2.1. If you are using Windows Authentication to connect to SQL Server (like me), you don't need to provide a password for the `dbo` user. The `dbo` user is the default database owner, and it is usually mapped to the Windows account used to install and configure SQL Server. 
-Just add to `.env` next:
-DB_SERVER=your_server_name
-DB_NAME=your_database_name
+SQL_SERVER=your_server_name
+SQL_DATABASE=your_database_name
+SQL_DRIVER=
+SQL_TRUSTED_CONNECTION=yes_or_no*
 
-2.2. If you create a special user with password, then add to `.env` next:
-    DB_SERVER=myserver
-    DB_NAME=mydatabase
-    DB_USERNAME=myusername
-    DB_PASSWORD=mypassword
-
-Then in `from_openaq_to_sql.py` the get database credentials from environment variables:
-    `server = os.environ.get("SERVER")`
-    `database = os.environ.get("DATABASE")`
-    `username = os.environ.get("USERNAME")`
-    `password = os.environ.get("PASSWORD")`
-Next - Set up the ODBC connection:
-    conn_str = (
-        "DRIVER={ODBC Driver 17 for SQL Server};"
-        f"SERVER={server};DATABASE={database};UID={username};PWD={password};"
-    )
-
+*As for the SQL_TRUSTED_CONNECTION value, this should be set to yes if you are using Windows authentication, and no if you are using SQL Server authentication.
 
 ##Also, make sure you have the necessary libraries installed. For this just running:
 `pip install -r requirements.txt`

@@ -1,29 +1,41 @@
-import pyodbc
 import pandas as pd
+import pyodbc
 from dotenv import load_dotenv
 import os
 
-# load environment variables from .env file
+# Load environment variables from .env file
 load_dotenv()
 
-# define connection string
-conn_str = (
-    "Driver={SQL Server};"
-    f"Server={os.getenv('DB_SERVER')};"
-    f"Database={os.getenv('DB_NAME')};"
-    "Trusted_Connection=yes;"
-)
+# Get environment variables
+server = os.getenv("SQL_SERVER")
+database = os.getenv("SQL_DATABASE")
+driver = os.getenv("SQL_DRIVER")
+trusted_connection = os.getenv("SQL_TRUSTED_CONNECTION")
 
-# connect to SQL Server
+# Set up connection string
+if trusted_connection.lower() == "yes":
+    conn_str = f"DRIVER={driver};SERVER={server};DATABASE={database};Trusted_Connection=yes;"
+else:
+    user = os.getenv("SQL_USER")
+    password = os.getenv("SQL_PASSWORD")
+    conn_str = f"DRIVER={driver};SERVER={server};DATABASE={database};UID={user};PWD={password};"
+
+# Connect to database
 cnxn = pyodbc.connect(conn_str)
+cursor = cnxn.cursor()
 
-# read data from OpenAQ API into a pandas DataFrame
-url = "https://api.openaq.org/v1/measurements?country=UA"
-df = pd.read_json(url)
+# Read data from API using pandas
+url = "https://api.openaq.org/v1/measurements"
+params = {"country": "UA", "limit": 10000}
+response = pd.read_json(url, params=params)
+data = response["results"]
 
-# write data to SQL Server table
-table_name = "openaq_measurements"
-df.to_sql(table_name, cnxn, if_exists="append", index=False)
+# Write data to database
+for row in data:
+    sql = f"INSERT INTO openaq(country, city, location, parameter, value, unit, date_utc) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    cursor.execute(sql, row["country"], row["city"], row["location"], row["parameter"], row["value"], row["unit"], row["date"]["utc"])
+cnxn.commit()
 
-# close the connection
+# Close database connection
+cursor.close()
 cnxn.close()
