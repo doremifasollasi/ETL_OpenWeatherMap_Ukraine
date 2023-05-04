@@ -1,4 +1,6 @@
-ALTER TABLE [dbo].[AirQualityData] ALTER COLUMN [location] NVARCHAR(255)
-ALTER TABLE [dbo].[AirQualityData] ALTER COLUMN [parameter] NVARCHAR(50)
-ALTER TABLE [dbo].[AirQualityData] ALTER COLUMN [date_utc] DATETIME
-ALTER TABLE [dbo].[AirQualityData] ALTER COLUMN [value] FLOAT;
+ALTER TABLE [dbo].[WeatherData] ALTER COLUMN [city] VARCHAR(255);
+ALTER TABLE [dbo].[WeatherData] ALTER COLUMN [temperature] FLOAT;
+ALTER TABLE [dbo].[WeatherData] ALTER COLUMN [humidity] INT;
+ALTER TABLE [dbo].[WeatherData] ALTER COLUMN [wind_speed] FLOAT;
+ALTER TABLE [dbo].[WeatherData] ALTER COLUMN [weather_description] VARCHAR(255);
+ALTER TABLE [dbo].[WeatherData] ALTER COLUMN [timestamp] DATETIME;

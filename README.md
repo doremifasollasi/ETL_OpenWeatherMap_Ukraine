@@ -1,7 +1,7 @@
-# ETL_AirQualityData
-Pet-project for to demonstrate knowledge and skills
+# ETL_OpenWeatherMap_Ukraine
+Pet-project for to demonstrate knowledge and skills.
 
-Details about this project. Here are steps to get started:
+## Details about this project. Here are steps to get started:
 
 1. Choose an API that provides dynamic data related to Ukraine. You can use Python libraries such as requests to access the API and retrieve data.
 

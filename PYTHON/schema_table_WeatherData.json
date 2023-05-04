@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WeatherData",
+  "type": "object",
+  "properties": {
+      "city": {
+          "type": "string",
+          "maxLength": 255
+      },
+      "temperature": {
+          "type": "number"
+      },
+      "humidity": {
+          "type": "integer"
+      },
+      "wind_speed": {
+          "type": "number"
+      },
+      "weather_description": {
+          "type": "string",
+          "maxLength": 255
+      }
+  },
+  "required": [
+      "city",
+      "temperature",
+      "humidity",
+      "wind_speed",
+      "weather_description"
+  ]
+}
