@@ -36,9 +36,11 @@ So, for OpenWeatherMap API, you can follow these steps:
 
 4. The API returns the weather data in JSON format. You can use the json module in Python to parse the JSON data and extract the information you need.
 
-##Also, make sure you have the necessary libraries installed. For this just running:
-    `python -m venv owmenv`
-    `pip install -r requirements.txt`
+##Use `init.bat` file for automate 
+- sets up a virtual environment, 
+- installs the necessary Python packages, 
+- and runs a specific Python script for OpenWeatherMap data conversion and storage in a SQL database.. For this just running:
+    `init.bat`
 
 #More details about `from_owm_to_sql.py`
 The script makes a GET request to the OpenWeatherMap API, specifying the country parameter as 'UA' for Ukraine and the limit parameter as the desired number of records to retrieve. It retrieves the response data as JSON and converts it to a pandas DataFrame. Then, it establishes a connection to SQL Server using pyodbc and writes the data from the DataFrame to the specified table using the to_sql method.
