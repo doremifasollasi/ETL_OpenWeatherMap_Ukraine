@@ -39,8 +39,8 @@ So, for OpenWeatherMap API, you can follow these steps:
 ##Use `init.bat` file for automate 
 - sets up a virtual environment, 
 - installs the necessary Python packages, 
-- and runs a specific Python script for OpenWeatherMap data conversion and storage in a SQL database.. For this just running:
-    `init.bat`
+- and runs a specific Python script for OpenWeatherMap data conversion and storage in a SQL database.. For this just running from root:
+    `init.bat FOLDER_WITH_PYTHON\my_script.py`
 
 #More details about `from_owm_to_sql.py`
 The script makes a GET request to the OpenWeatherMap API, specifying the country parameter as 'UA' for Ukraine and the limit parameter as the desired number of records to retrieve. It retrieves the response data as JSON and converts it to a pandas DataFrame. Then, it establishes a connection to SQL Server using pyodbc and writes the data from the DataFrame to the specified table using the to_sql method.
