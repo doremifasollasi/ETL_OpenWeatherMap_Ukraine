@@ -1,9 +1,10 @@
 import pandas as pd
 import pyodbc
 import requests
-from dotenv import load_dotenv
 import os
 import json
+from ukrainian_cities import list_ukrainian_cities
+from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
@@ -40,7 +41,7 @@ params = {
 }
 
 # Define the list of cities in Ukraine to retrieve weather data for
-cities = ['Kyiv', 'Kharkiv', 'Odesa', 'Dnipro', 'Donetsk', 'Zaporizhzhia', 'Lviv', 'Kryvyi Rih', 'Mykolaiv', 'Mariupol', 'Luhansk', 'Vinnytsia', 'Makiivka', 'Simferopol', 'Sevastopol', 'Kherson', 'Poltava', 'Chernihiv', 'Cherkasy', 'Sumy', 'Zhytomyr', 'Khmelnytskyi', 'Rivne', 'Ivano-Frankivsk', 'Kremenchuk', 'Ternopil', 'Lutsk', 'Bila Tserkva', 'Kramatorsk', 'Melitopol', 'Kerch']
+cities = list_ukrainian_cities
 
 # Create an empty DataFrame to store the weather data
 df_weather = pd.DataFrame()
