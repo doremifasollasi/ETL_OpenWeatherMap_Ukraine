@@ -1,5 +1,5 @@
 #Overview
-File `from_owm_to_sql.py`
+File `WeatherData.py`
 - script for retrieving data from the OpenWeatherMap API using Python and pandas, and then loading it into a SQL Server table (how to config SQL Server look at the README file in the SQL folder).
 
 #Settings
@@ -42,7 +42,7 @@ So, for OpenWeatherMap API, you can follow these steps:
 - and runs a specific Python script for OpenWeatherMap data conversion and storage in a SQL database.. For this just running from root:
     `init.bat PYTHON\my_script.py`
 
-#More details about `from_owm_to_sql.py`
+#More details about `WeatherData.py`
 The script makes a GET request to the OpenWeatherMap API, specifying the country parameter as 'UA' for Ukraine and the limit parameter as the desired number of records to retrieve. It retrieves the response data as JSON and converts it to a pandas DataFrame. Then, it establishes a connection to SQL Server using pyodbc and writes the data from the DataFrame to the specified table using the to_sql method.
 
 For the future, it is possible to expand the functionality - Make sure to adjust the code according to your specific requirements and API response structure. You may need to map the JSON data fields to the corresponding table columns in order to ensure proper data insertion.
