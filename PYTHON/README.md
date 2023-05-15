@@ -48,3 +48,35 @@ The script makes a GET request to the OpenWeatherMap API, specifying the country
 For the future, it is possible to expand the functionality - Make sure to adjust the code according to your specific requirements and API response structure. You may need to map the JSON data fields to the corresponding table columns in order to ensure proper data insertion.
 
 Let me know if you have any further questions!
+
+#Explain every row.Let's go through Python script step by step:
+1. Import the necessary libraries:
+    - pandas: Used for data manipulation and analysis.
+    - pyodbc: Provides Python connectivity to SQL Server databases.
+    - requests: Used to send HTTP requests and retrieve data from APIs.
+    - dotenv: Helps load environment variables from a .env file.
+    - os: Provides a way to access operating system functionality.
+    - json: Used to work with JSON data.
+    - list_ukrainian_cities: Used for code flexibility so as not to be hardcoded. 
+2. Load environment variables from a .env file using load_dotenv().
+3. Retrieve environment variables using os.getenv() for the SQL Server connection details (server, database, driver, trusted_connection) and the OpenWeatherMap API key (owm_api_key).
+4. Set up the connection string based on the trusted_connection variable. If trusted connection is enabled, the connection string is built without a username and password. Otherwise, the username and password are also included in the connection string.
+5. Connect to the SQL Server database using pyodbc.connect(). This establishes a connection and returns a connection object (cnxn), which is used to interact with the database.
+6. Load the schema definition from the schema_table_WeatherData.json file using json.load() and assign it to the schema variable. This schema definition likely contains information about the table structure.
+7. Define the OpenWeatherMap API endpoint URL (url) and the required parameters (params). The parameters include your OpenWeatherMap API key, the units for temperature (Celsius), and the language (English).
+8. Define the list of cities in Ukraine for which you want to retrieve weather data. For this import 
+9. Create an empty DataFrame (df_weather) to store the weather data.
+10. Loop through each city in the cities list.
+11. Set the q parameter in the params dictionary to the current city.
+12. Make a GET request to the OpenWeatherMap API using requests.get() and passing the URL and parameters.
+13. Parse the JSON response using response.json() and assign the resulting data to the data variable.
+14 Extract the relevant fields from the data dictionary and create a row dictionary with the city name, temperature, humidity, wind speed, and weather description.
+15. Append the row dictionary as a DataFrame row to the df_weather DataFrame using pd.concat().
+16. After the loop, the df_weather DataFrame contains weather data for all the cities.
+17. Define the SQL Server table name and schema (schema_name and table_name).
+18. Iterate over each row in the df_weather DataFrame using df_weather.iterrows().
+19. Build the SQL query to insert the weather data into the database using the schema definition. The query is parameterized with placeholders (?) for the values.
+20. Execute the query with the row data as parameters using cursor.execute().
+21. Commit the changes to the database using cnxn.commit().
+22. Print a success message indicating that the weather data has been saved to the database.
+23. That's a summary of how your Python script works. It retrieves weather data from the OpenWeatherMap API for a list of cities in Ukraine, stores the data in a DataFrame, and then inserts it into a SQL Server database.
