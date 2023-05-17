@@ -1,3 +1,4 @@
+-- Change the data types of existing columns
 ALTER TABLE [dbo].[WeatherData] ALTER COLUMN [city] VARCHAR(255);
 ALTER TABLE [dbo].[WeatherData] ALTER COLUMN [temperature] FLOAT;
 ALTER TABLE [dbo].[WeatherData] ALTER COLUMN [humidity] INT;
