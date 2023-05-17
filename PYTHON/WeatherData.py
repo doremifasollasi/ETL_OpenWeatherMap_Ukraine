@@ -73,7 +73,12 @@ for index, row in df_weather.iterrows():
 
     
     # Execute the query with the row data as parameters
-    cursor.execute(query, row['city'], row['temperature'], row['humidity'], row['wind_speed'], row['weather_description'])
+    cursor.execute(query, 
+                   row['city'], 
+                   row['temperature'], 
+                   row['humidity'], 
+                   row['wind_speed'], 
+                   row['weather_description'])
     
 # Commit the changes to the database
 cnxn.commit()
