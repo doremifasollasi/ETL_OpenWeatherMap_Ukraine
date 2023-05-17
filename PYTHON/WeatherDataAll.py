@@ -30,7 +30,7 @@ cnxn = pyodbc.connect(conn_str)
 cursor = cnxn.cursor()
 
 # Load schema definition from schema_table_WeatherData.json
-with open('schema_table_WeatherDataAll.json') as f:
+with open('SCHEMAS/schema_table_WeatherDataAll.json') as f:
     schema = json.load(f)
 
 # Define the OpenWeatherMap API endpoint URL and any required parameters
