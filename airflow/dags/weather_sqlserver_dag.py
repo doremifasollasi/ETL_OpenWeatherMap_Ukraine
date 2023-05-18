@@ -3,7 +3,7 @@ from airflow.models import Variable
 from airflow.operators.python import PythonOperator
 from airflow.providers.http.operators.http import SimpleHttpOperator
 from airflow.providers.http.sensors.http import HttpSensor
-from airflow.providers.mssql.operators.mssql import MsSqlOperator
+from airflow.providers.microsoft.mssql.operators.mssql import MsSqlOperator
 from airflow.utils.dates import days_ago
 
 import json
