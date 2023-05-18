@@ -14,7 +14,12 @@ def _process_weather(ti):
     temp = info["main"]["temp"]
     return timestamp, temp
 
-with DAG(dag_id="weather_sqlite_dag", schedule_interval="@hourly", start_date=days_ago(2), catchup=False) as dag:
+with DAG(dag_id="weather_sqlite_dag", 
+         schedule_interval="@hourly", 
+         start_date=days_ago(2), 
+         catchup=False,
+         tags=["olena"]
+) as dag:
     db_create = SqliteOperator(
         task_id="create_weather_table",
         sqlite_conn_id="airflow_conn",
