@@ -22,7 +22,7 @@ with DAG(dag_id="weather_sqlite_dag",
 ) as dag:
     db_create = SqliteOperator(
         task_id="create_weather_table",
-        sqlite_conn_id="airflow_conn",
+        sqlite_conn_id="weather_conn_sqlite",
         sql="""
                 CREATE TABLE IF NOT EXISTS measures 
             (
@@ -33,14 +33,14 @@ with DAG(dag_id="weather_sqlite_dag",
 
     check_api = HttpSensor(
         task_id="check_api",
-        http_conn_id="weather_conn",
+        http_conn_id="weather_conn_http_sensor",
         endpoint="data/2.5/weather",
         request_params={"appid": Variable.get("WEATHER_API_KEY"), "q": "Lviv"}
     )
 
     extract_data = SimpleHttpOperator(
         task_id="extract_data",
-        http_conn_id="weather_conn",
+        http_conn_id="weather_conn_http_sensor",
         endpoint="data/2.5/weather",
         data={"appid": Variable.get("WEATHER_API_KEY"), "q": "Lviv"},
         method="GET",
@@ -55,7 +55,7 @@ with DAG(dag_id="weather_sqlite_dag",
 
     inject_data = SqliteOperator(
         task_id="inject_data",
-        sqlite_conn_id="airflow_conn",
+        sqlite_conn_id="weather_conn_sqlite",
         sql="""
         INSERT INTO measures (timestamp, temp) VALUES ({{ti.xcom_pull(task_ids='process_data')[0]}}, {{ti.xcom_pull(task_ids='process_data')[1]}});
         """,
