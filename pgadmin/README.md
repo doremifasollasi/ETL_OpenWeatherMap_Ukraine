@@ -35,12 +35,11 @@ After the installation, you can launch pgAdmin 4 by running the following comman
 
 Choose the installation option that matches your requirements and follow the respective installation instructions to install pgAdmin 4.
 
-## To build and run the Dockerfiles for both pgadmin and airflow, and then run docker-compose, you can follow these steps:
-1. Build and run the Dockerfile for pgadmin:
+## Build and run the Dockerfile for pgadmin:
 Navigate to the pgadmin folder in your terminal:
     `cd pgadmin`
 Build the Docker image:
     `docker build -t pgadmin-image .`
     `docker build -t pgadmin-python -f Dockerfile . --no-cache`
 Run the Docker container if you will not run the docker-compose:
-    `docker run -d --name pgadmin-container -p 5050:5050 pgadmin-image`
+    `docker run -d --name pgadmin-container -p 5050:5050 pgadmin-python`

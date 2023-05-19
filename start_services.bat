@@ -1,13 +1,10 @@
 REM Build pgadmin container
-cd pgadmin
-docker build -t pgadmin-python -f Dockerfile . --no-cache
+docker build -t pgadmin-python -f pgadmin/Dockerfile . --no-cache
 
 REM Build airflow container
-cd ../airflow
-docker build -t airflow-sqlserver -f Dockerfile . --no-cache
+docker build -t airflow-sqlserver -f airflow/Dockerfile . --no-cache
 
 REM Run docker-compose
-cd ..
 docker-compose up
 
 @REM Please note that 
