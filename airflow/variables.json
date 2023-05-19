@@ -1,0 +1,10 @@
+{
+    "SQL_SERVER": "insert_your_value",
+    "SQL_DATABASE": "insert_your_value",
+    "SQL_DRIVER": "insert_your_value",
+    "SQL_TRUSTED_CONNECTION": "insert_your_value",
+    "SQL_USERNAME": "insert_your_value",
+    "SQL_PASSWORD": "insert_your_value",
+    "OWM_API_KEY": "insert_your_value"
+  }
+  
