@@ -81,10 +81,24 @@ services:
       POSTGRES_DB: airflow
     volumes:
       - postgres-db-volume:/var/lib/postgresql/data
+    ports:
+      - 5432:5432  # Map the PostgreSQL container port to the host machine
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 5s
       retries: 5
+    restart: always
+
+  pgadmin:
+    build:
+      context: ./pgadmin
+      dockerfile: Dockerfile
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin  # Specify the volume for pgAdmin data
+    ports:
+      - 5050:5050  # Map the pgAdmin container port to the host machine
+    depends_on:
+      - postgres
     restart: always
 
   redis:
@@ -100,6 +114,9 @@ services:
 
   airflow-webserver:
     <<: *airflow-common
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
     command: webserver
     ports:
       - 9099:8080
@@ -116,6 +133,9 @@ services:
 
   airflow-scheduler:
     <<: *airflow-common
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
     command: scheduler
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"']
@@ -130,6 +150,9 @@ services:
 
   airflow-worker:
     <<: *airflow-common
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
     command: celery worker
     healthcheck:
       test:
@@ -151,6 +174,9 @@ services:
 
   airflow-triggerer:
     <<: *airflow-common
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
     command: triggerer
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type TriggererJob --hostname "$${HOSTNAME}"']
@@ -165,6 +191,9 @@ services:
 
   airflow-init:
     <<: *airflow-common
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
     entrypoint: /bin/bash
     # yamllint disable rule:line-length
     command:
@@ -245,6 +274,9 @@ services:
     <<: *airflow-common
     profiles:
       - debug
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
     environment:
       <<: *airflow-common-env
       CONNECTION_CHECK_MAX_COUNT: "0"
