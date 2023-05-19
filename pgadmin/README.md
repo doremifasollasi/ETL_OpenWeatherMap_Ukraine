@@ -39,7 +39,8 @@ Choose the installation option that matches your requirements and follow the res
 Navigate to the pgadmin folder in your terminal:
     `cd pgadmin`
 Build the Docker image:
-    `docker build -t pgadmin-image .`
+    `docker build -t pgadmin-python .`
+or I recommend use it:
     `docker build -t pgadmin-python -f Dockerfile . --no-cache`
 Run the Docker container if you will not run the docker-compose:
     `docker run -d --name pgadmin-container -p 5050:5050 pgadmin-python`
