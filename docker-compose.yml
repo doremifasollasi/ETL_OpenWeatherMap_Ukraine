@@ -94,7 +94,7 @@ services:
       context: ./pgadmin
       dockerfile: Dockerfile
     volumes:
-      - ./pgadmin/pgadmin-data:/var/lib/pgadmin  # Specify the volume for pgAdmin data
+      - ./pgadmin/pgadmin-data:/var/lib/pgadmin/data  # Specify the volume for pgAdmin data
     ports:
       - 5050:5050  # Map the pgAdmin container port to the host machine
     depends_on:
