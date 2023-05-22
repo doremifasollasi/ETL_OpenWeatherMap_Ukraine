@@ -5,7 +5,7 @@ REM Build airflow container
 docker build -t airflow-sqlserver -f airflow/Dockerfile . --no-cache
 
 REM Run docker-compose
-docker-compose up
+docker-compose --profile flower up
 
 @REM Please note that 
 @REM I've added cd .. after building the airflow container to move back to the parent directory before running docker-compose up. 
