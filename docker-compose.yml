@@ -90,17 +90,18 @@ services:
     restart: always
 
   pgadmin:
-    build:
-      context: ./pgadmin
-      dockerfile: Dockerfile
+    image: dpage/pgadmin4
+    restart: always
     volumes:
       - ./pgadmin/pgadmin-data:/var/lib/pgadmin/data  # Specify the volume for pgAdmin data
     ports:
-      - 5050:5050  # Map the pgAdmin container port to the host machine
+      - 5050:80  # Map the container's port 80 to the host machine's port 5050
     depends_on:
       - postgres
-    restart: always
-
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=your_email@example.com  # Set the default login email
+      - PGADMIN_DEFAULT_PASSWORD=your_password         # Set the default login password
+  
   redis:
     image: redis:latest
     expose:
