@@ -1,6 +1,7 @@
 ##To connect to the PostgreSQL server running inside the container, you have a few options for obtaining the client application.
 
-Spoiler: I choose prefer running pgAdmin 4 as a container
+Spoiler: I choose prefer running pgAdmin 4 as a container.
+Spoiler-spoiler: I found out that I can specify `pgadmin4` as a service in the docker-compose structure. For now, I stopped at this option, so I deleted the Dockerfile from this folder.
 
 1. pgAdmin: pgAdmin is a popular client application for managing PostgreSQL databases. You can download it for free from the official website: https://www.pgadmin.org/. Choose the version compatible with your operating system, and follow the installation instructions. Once installed, you can launch pgAdmin and create a new server connection using the details I mentioned in the previous response.
 
@@ -44,3 +45,23 @@ or I recommend use it:
     `docker build -t pgadmin-python -f Dockerfile . --no-cache`
 Run the Docker container if you will not run the docker-compose:
     `docker run -d --name pgadmin-container -p 5050:5050 pgadmin-python`
+
+
+## Connections fro PostgreSQL
+The connection details you need to provide in Apache Airflow are for the PostgreSQL server, not for pgAdmin.
+
+When you add a connection in Airflow, you are specifying the details to connect to the PostgreSQL database where your Airflow metadata and other data will be stored. Airflow uses the connection information to interact with the PostgreSQL server.
+
+Here's how you should fill out the fields for the PostgreSQL connection in Airflow:
+    - Conn Id: Enter a unique identifier for the connection, e.g., postgres_default.
+    - Conn Type: Select "Postgres" from the dropdown menu.
+    - Host: Enter the hostname or IP address of your PostgreSQL server. In your case, since you're using Docker Compose, you can enter postgres as the hostname.
+    - Schema: (Optional) Enter the default schema to use for the connection.
+    - Login: Enter the username for connecting to the PostgreSQL server. In your case, you can use airflow.
+    - Password: Enter the password for the specified username. In your case, you can use airflow.
+    - Port: Enter the port number on which the PostgreSQL server is running. The default port for PostgreSQL is 5432.
+    - Extra: You can leave this field empty.
+
+By providing these details, Airflow will establish a connection to your PostgreSQL server and use it for storing metadata and other relevant information.
+
+To summarize, you should insert the data about the PostgreSQL server when adding the connection in Airflow, not the pgAdmin details.
