@@ -1,6 +1,3 @@
-REM Build pgadmin container
-docker build -t pgadmin-python -f pgadmin/Dockerfile . --no-cache
-
 REM Build airflow container
 docker build -t airflow-sqlserver -f airflow/Dockerfile . --no-cache
 
