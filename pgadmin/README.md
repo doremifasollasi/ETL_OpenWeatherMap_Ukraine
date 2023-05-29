@@ -47,7 +47,7 @@ Run the Docker container if you will not run the docker-compose:
     `docker run -d --name pgadmin-container -p 5050:5050 pgadmin-python`
 
 
-## Connections fro PostgreSQL
+## Connections for PostgreSQL
 The connection details you need to provide in Apache Airflow are for the PostgreSQL server, not for pgAdmin.
 
 When you add a connection in Airflow, you are specifying the details to connect to the PostgreSQL database where your Airflow metadata and other data will be stored. Airflow uses the connection information to interact with the PostgreSQL server.
@@ -57,11 +57,18 @@ Here's how you should fill out the fields for the PostgreSQL connection in Airfl
     - Conn Type: Select "Postgres" from the dropdown menu.
     - Host: Enter the hostname or IP address of your PostgreSQL server. In your case, since you're using Docker Compose, you can enter postgres as the hostname.
     - Schema: (Optional) Enter the default schema to use for the connection.
-    - Login: Enter the username for connecting to the PostgreSQL server. In your case, you can use airflow.
-    - Password: Enter the password for the specified username. In your case, you can use airflow.
+    - Login: Enter the username for connecting to the PostgreSQL server. In your case, you can use `airflow`.
+    - Password: Enter the password for the specified username. In your case, you can use `airflow`.
     - Port: Enter the port number on which the PostgreSQL server is running. The default port for PostgreSQL is 5432.
     - Extra: You can leave this field empty.
 
 By providing these details, Airflow will establish a connection to your PostgreSQL server and use it for storing metadata and other relevant information.
 
 To summarize, you should insert the data about the PostgreSQL server when adding the connection in Airflow, not the pgAdmin details.
+
+## Work with PostgreSQL due pgAdmin
+Go to the `http://localhost:5050/`
+Enter login and password, which you identify in docker-compose:
+    `your_email@example.com`
+    `your_password`
+Now you can see main page - `http://localhost:5050/browser/`, where are exist `airflow` server.
