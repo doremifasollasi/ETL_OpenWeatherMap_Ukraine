@@ -67,8 +67,40 @@ By providing these details, Airflow will establish a connection to your PostgreS
 To summarize, you should insert the data about the PostgreSQL server when adding the connection in Airflow, not the pgAdmin details.
 
 ## Work with PostgreSQL due pgAdmin
-Go to the `http://localhost:5050/`
+#To correct fill out fields when adding a server registration in pgAdmin 4, you can follow these steps:
+
+1.Open pgAdmin 4 in your web browser `http://localhost:5050/`
 Enter login and password, which you identify in docker-compose:
     `your_email@example.com`
     `your_password`
-Now you can see main page - `http://localhost:5050/browser/`, where are exist `airflow` server.
+
+2. Now you can see main page - `http://localhost:5050/browser/`.
+In the left-hand panel, expand the `airflow` group to view the list of registered servers. It's empty there.
+
+3. Right-click on the `airflow` group server registration and select `Register` and then `Server` from the context menu.
+
+4. In the `Register - Server` dialog that appears, you will see several fields that need to be filled out. Here's how you can correct them:
+    General Tab: Provide a name for the server in the "Name" field. This can be any descriptive name you choose.
+        `OWM`
+    Connection Tab: Ensure you have the correct information for the server connection.
+        Host name/address: Enter the hostname or IP address of the server where your PostgreSQL database is running.
+            `172.21.0.1` (I found this value in the logs of the pgadmin container)
+        Port: Specify the port number on which your PostgreSQL database is listening. The default is usually 5432.
+            `5432`
+        Maintenance database: Provide the name of the default database that you want to connect to.
+            `postgres` (left the value suggested by the system)
+        Username: Enter the username to be used for authentication. I specified such a value as in "docker-compose - services:postgres: environment:POSTGRES_USER:"
+            `airflow`
+        Password: Input the password associated with the provided username. I specified such a value as in "docker-compose - services:postgres: environment:POSTGRES_USER:"
+            `airflow`
+    SSL Tab (optional): If your PostgreSQL server uses SSL, you can configure the SSL connection settings in this tab.
+
+    SSH Tunnel Tab (optional): If you need to connect to the PostgreSQL server through an SSH tunnel, you can configure the SSH tunnel settings in this tab.
+
+5. After filling out the necessary fields, click the "Save" button to save the server registration.
+
+Make sure to provide accurate and valid information for the connection details to establish a successful connection to the PostgreSQL server. Double-check the hostname, port, database, username, and password to ensure they are correct.
+
+Once you save the server registration, it should appear in the list of servers in pgAdmin 4, and you should be able to connect to it and interact with the databases and objects within it.
+
+##

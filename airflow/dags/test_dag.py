@@ -8,7 +8,7 @@ from datetime import datetime
 
 def task1():
     # Use SQLite connection
-    sqlite_hook = SqliteHook(sqlite_conn_id='sqlite')
+    sqlite_hook = SqliteHook(sqlite_conn_id='weather_conn_sqlite')
     # Perform task using SQLite connection
 
 def task2():

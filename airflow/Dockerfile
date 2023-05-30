@@ -2,6 +2,8 @@ FROM apache/airflow:2.2.3
 
 # Copy the SCHEMAS folder into the container
 COPY SCHEMAS /opt/airflow/SCHEMAS
+COPY airflow/dags/ukrainian_cities.py /opt/airflow/dags/ukrainian_cities.py
+COPY sqlsrv32.dll /opt/airflow/drivers/sqlsrv32.dll
 
 # Copy the requirements.txt file into the container
 COPY airflow/requirements.txt /opt/airflow/requirements.txt

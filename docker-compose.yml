@@ -94,6 +94,7 @@ services:
     restart: always
     volumes:
       - ./pgadmin/pgadmin-data:/var/lib/pgadmin/data  # Specify the volume for pgAdmin data
+      # - ./pgadmin/pgadmin-storage:/var/lib/pgadmin/storage/your_email_example.com
     ports:
       - 5050:80  # Map the container's port 80 to the host machine's port 5050
     depends_on:
@@ -127,6 +128,8 @@ services:
       timeout: 10s
       retries: 5
     restart: always
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
     depends_on:
       <<: *airflow-common-depends-on
       airflow-init:
