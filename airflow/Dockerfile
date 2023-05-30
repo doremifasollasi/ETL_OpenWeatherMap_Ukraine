@@ -5,7 +5,6 @@ COPY SCHEMAS /opt/airflow/SCHEMAS
 
 # Copy files into the container
 COPY airflow/requirements.txt /opt/airflow/requirements.txt
-COPY airflow/ukrainian_cities.py /opt/airflow/dags/ukrainian_cities.py
 COPY airflow/sqlsrv32.dll /opt/airflow/drivers/sqlsrv32.dll
 
 # Install the required packages

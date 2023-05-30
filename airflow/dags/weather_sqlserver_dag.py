@@ -2,7 +2,7 @@ import pandas as pd
 import pyodbc
 import requests
 import json
-from ukrainian_cities import list_ukrainian_cities
+from auxiliary.ukrainian_cities import list_ukrainian_cities
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime
