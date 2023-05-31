@@ -8,6 +8,17 @@ or I recommend use it:
 Run the Docker container if you will not run the docker-compose:
     `docker run -d --name airflow-container -p 9099:8080 airflow-sqlserver`
 
+
+## Setup environment
+If you want to access the `airflow.cfg` file from the `etl_openweathermap_ukraine-airflow-webserver-1` container, you should copt it. By using the `docker cp` command, you were able to extract it file from the container and make it available on your local machine.
+
+This allows you to inspect the content of the file, make modifications if necessary, or use them as a reference for setting up a similar environment locally. It can be helpful when you need to examine specific configuration files or access data generated or stored within a Docker container.
+
+Overall, the docker cp command provides a convenient way to extract files from Docker containers, enabling you to interact with and analyze the contents of the container from your local machine.
+    `cd airflow`
+    `docker cp etl_openweathermap_ukraine-airflow-webserver-1:/opt/airflow/airflow.cfg ./airflow.cfg`
+
+
 ## Connections for few services
 The connection details you need to provide in Apache Airflow 
     `http://localhost:9099/connection/list/`. 
