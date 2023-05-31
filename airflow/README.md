@@ -36,4 +36,4 @@ For ease of navigation and search, use the description, for example:
     Type - `Http`
     Host - `https://api.openweathermap.org`
 
-[## Connections for PostgreSQL](https://github.com/doremifasollasi/ETL_OpenWeatherMap_Ukraine/blob/16cf986f3267820718efc966280f1ecc4459debc/pgadmin/README.md#L50)
+[4. Connection for work with PostgreSQL](https://github.com/doremifasollasi/ETL_OpenWeatherMap_Ukraine/blob/16cf986f3267820718efc966280f1ecc4459debc/pgadmin/README.md#L50)
