@@ -66,7 +66,9 @@ By providing these details, Airflow will establish a connection to your PostgreS
 
 To summarize, you should insert the data about the PostgreSQL server when adding the connection in Airflow, not the pgAdmin details.
 
+
 ## Work with PostgreSQL due pgAdmin
+
 #To correct fill out fields when adding a server registration in pgAdmin 4, you can follow these steps:
 
 1.Open pgAdmin 4 in your web browser `http://localhost:5050/`
@@ -103,4 +105,51 @@ Make sure to provide accurate and valid information for the connection details t
 
 Once you save the server registration, it should appear in the list of servers in pgAdmin 4, and you should be able to connect to it and interact with the databases and objects within it.
 
-##
+# Restoring the sample database
+## Download sample PostgreSQL database
+
+You can download the sample database from the following link: [PostgreSQL Sample Database](https://www.postgresqltutorial.com/postgresql-getting-started/postgresql-sample-database/)
+
+Once downloaded, create a new database named `dvdrental` to restore the sample data.
+
+## Make the file available 
+
+To restore the sample database, you need to have the `dvdrental.tar` file available inside the Docker container. Follow these steps:
+
+Copy the `dvdrental.tar` file from your local machine to the appropriate location inside the container using the `docker cp` command.
+
+    ```bash
+    docker cp <local_path> <container_id>:<container_path>
+    ```
+
+In the command, replace `<local_path>`, `<container_id>`, and `<container_path>` with the appropriate values for your setup.
+
+    ```bash
+    cd pgadmin
+    docker cp ./dvdrental.tar etl_openweathermap_ukraine-pgadmin-1:/var/lib/pgadmin/storage/your_email_example.com/dvdrental.tar
+    ```
+
+## Create role
+To create the "postgres" role, you can follow these steps:
+
+Run the following SQL command to create the "postgres" role:
+    `CREATE ROLE postgres;`
+This command creates a new role named "postgres" without any login privileges. By default, the role doesn't have any superuser, create database, or create role privileges.
+
+Optionally, you can grant additional privileges to the "postgres" role based on your requirements. For example, to grant superuser privileges, you can run the following command:
+    `ALTER ROLE postgres WITH SUPERUSER;`
+This command grants the superuser privilege to the "postgres" role, allowing it to perform administrative tasks.
+
+Remember to execute these commands with appropriate administrative privileges or use an account that has the necessary privileges to create roles in your PostgreSQL database.
+
+## Finally - Restore the database
+Right-click on the target database and select `Restore` from the context menu. This will open the Restore dialog box.
+
+Specify the backup file: In the Restore dialog box, switch to the `Genera` tab. Click on the `Filename` field and type just
+    `dvdrental.tar`
+
+Start the restore process: Once you have configured the restore options, click the `Restore` button to start the restore process. The restore progress will be displayed in the pgAdmin interface, and you can monitor it until the restore operation completes.
+
+Verify the restore: After the restore process finishes, you can verify the restored database by expanding the Tables, Schemas, or any other relevant sections in the left sidebar to see the restored database objects.
+
+That's it! You have successfully restored a PostgreSQL database using the pgAdmin UI. Make sure to review the restored database to ensure that everything is in order and matches your expectations.

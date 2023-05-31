@@ -171,3 +171,6 @@ airflow/logs
 airflow/conn.png
 airflow/airflow.cfg
 # airflow/requirements.txt
+
+#pgadmin
+pgadmin/dvdrental.tar
