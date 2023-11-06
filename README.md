@@ -1,5 +1,6 @@
 # ETL_OpenWeatherMap_Ukraine
-Pet-project for to demonstrate knowledge and skills.
+Pet project to demonstrate knowledge and skills in data engineering
+
 
 ## Details about this project. Here are steps to get started:
 
